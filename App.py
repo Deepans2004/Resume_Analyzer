@@ -44,3 +44,12 @@ def pdf_reader(file):
             page_interpreter.process_page(page)
             print(page)
         text=fake_file_handle.getvalue()
+    converter.close()
+    fake_file_handle.close()
+    return text
+
+def show_pdf(file_path):
+    with open(file_path,"rb")as f:
+        base64_pdf=base64.b64encode(f.read()).decode('utf-8')
+    pdf_display=F'<iframe src="data:application/pdf;base64,{base64_pdf}'width="700" h
+
