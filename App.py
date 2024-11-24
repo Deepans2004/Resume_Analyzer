@@ -1,4 +1,4 @@
-from multiprocessing.managers import convert_to_error
+
 
 import streamlit as st
 import pandas as pd
@@ -13,6 +13,8 @@ from pdfminer3.pdfinterp import PDFResourceManager
 from pdfminer3.pdfinterp import PDFPageInterpreter
 from pdfminer3.converter import TextConverter
 import io,random
+
+from streamlit.components.v1 import iframe
 from streamlit_tags import st_tags
 from PIL import Image
 import pymysql
@@ -29,7 +31,7 @@ def fetch_yt_video(link):
 def get_table_download_link(df,filename,text):
     csv=df.to_csv(index=False)
     b64=base64.b64encode(csv.encode()).decode()
-    href=f'<a href="data:file/csv;base64,{b64}" download="{filename}">{text}</a>
+    href=f'<a href="data:file/csv;base64,{b64}" download="{filename}">{text}</a>'
     return href
 
 def pdf_reader(file):
@@ -51,5 +53,5 @@ def pdf_reader(file):
 def show_pdf(file_path):
     with open(file_path,"rb")as f:
         base64_pdf=base64.b64encode(f.read()).decode('utf-8')
-    pdf_display=F'<iframe src="data:application/pdf;base64,{base64_pdf}'width="700" h
+    pdf_display=F'<iframe src="data:application/pdf;base64,{base64_pdf}"width="700" height="1000" type="application/pdf"></iframe>'
 
